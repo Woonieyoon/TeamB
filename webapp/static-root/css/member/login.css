@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+body{
+    background-color: #fafafa; padding: 30px 3px 0px 3px;
+}
+
+.wrap{
+    width: 935px; height: 825px; margin: 0 auto; padding: 10px 60px;
+}
+
+/* login-image-div */
+.login-image-div{
+    width: 454px; height: 618px; float: left; margin-top: 70px;
+    background-image: url(/team-b-webapp/static-root/images/login-background.png);
+    background-position: 0 0;
+    background-size: 454px 618px;
+}
+.login-images{
+    width: 303px; height: 0px; margin: 99px 0px 0px 151px;
+}
+
+/*** login-content-div ***/
+.login-content-div{
+    width: 350px; height: 618px; float: right;
+    margin-top: 100px;
+}
+
+/** login-div **/
+.login-div{
+    width: 350px; height: 388px; border: 1px solid #efefef; background-color: #ffffff; padding: 10px 0px; margin-bottom: 10px;
+}
+
+/* login-logo-div */
+.login-logo-div{
+    width: 175px; height: 51px; margin: 22px 86px 36px 86px; float: left;
+    background-image: url(/team-b-webapp/static-root/images/login_instagram.png);
+    background-repeat: no-repeat;
+    background-position: -98px -150px;
+}
+
+/* login-form-div */
+.login-form-div{
+    width: 348px; height: 263px; float: left;
+}
+
+/* login-form */
+.login-form{
+    width: 100%; height: 100%; float: left; 
+}
+
+/* box_login */
+.box_login{
+    width: 268px; height: 80px; margin: 0 40px;
+}
+.inp_text{
+    width: 268px; height: 38px; margin-bottom: 6px; border: 1px solid #efefef; background-color: #fafafa; border-radius: 3px;
+}
+.inp_text input{
+    width: 258px; height: 36px; border: none; background: transparent;
+    padding: 9px 0px 7px 8px;
+}
+
+/* login-btn-box */
+.login-btn-box{
+    width: 268px; height: 30px; float: left; margin: 8px 40px;
+}
+.login-btn-box input{
+    width: 100%; height: 100%;
+    background-color: #C4E0FB; border: 1px solid #C4E0FB; color: #ffffff;
+    border-radius: 4px; font-size: 14px; font-weight: bold;
+}
+
+/* login-or-box */
+.login-or-box{
+    width: 268px; height: 15px; float: left; margin: 10px 40px 18px 40px;
+}
+.login-or-bar{
+    width: 103px; height: 1px; border: 0px solid black; float: left;
+    background-color: #efefef; margin: 7px 0px;
+}
+.login-or-text{
+    width: 26px; height: 15px; float: left; margin: 0px 18px; font-size: 13px; font-weight: 600; color: #999; line-height: 15px;
+}
+
+/* login-facebook-box */
+.login-facebook-box{
+    width: 268px; height: 20px; float: left; margin: 8px 40px;
+}
+.btn-login-facebook{
+    width: 100%; height: 100%; text-align: center; border: none;
+    background: transparent; cursor: pointer;
+}
+.login-facebook-logo{
+    position: relative; top: 3px;
+    width: 16px; height: 16px; display:inline-block; 
+    margin-right: 8px; 
+    background-image: url(/team-b-webapp/static-root/images/login_instagram.png);
+    background-position: -382px -399px;
+    background-repeat: no-repeat;
+}
+.login-facebook-text{
+    width: 134.23px; height: 19px; color: #385185; font-weight: 600;
+}
+
+/* forget-password */
+.forget-password{
+    width: 348px; height: 14px; margin-top: 12px; float: left;
+    font-size: 12px; line-height: 14px; text-align: center; color: #003569;
+    text-decoration: none;
+}
+
+/** join-btn-div **/
+.join-btn-div{
+    width: 350px; height: 63px; float: left; padding: 10px 0px; margin-bottom: 10px; border: 1px solid #efefef; background-color: #fff;
+}
+.join-btn-text{
+    width: 318px; height: 11px; margin: 13px; float: left; 
+    font-size: 14px; color: #999; line-height: 18px; text-align: center;
+    font-weight: 400;
+}
+#btn_join{
+    width: 56px; height: 19px; border: none; background: none; color: #003569;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+}
+
+/** download-btn-div **/
+.download-div{
+    width: 350px; height: 102px; float: left; 
+}
+.download-text{
+    width: 310px; height: 18px; float: left; margin: 10px 20px; text-align: center; color: #262626; font-size: 14px; line-height: 18px;
+}
+.download-btn-div{
+    width: 350px; height: 44px; float: left; margin: 10px 0px;
+    display: flex; justify-content: center;
+}
+.appstore{
+    width: 136px; height: 44px; margin-right: 8px; float: left;
+}
+.appstore img{
+    width: 136; height: 40px; 
+}
+.google{
+    width: 134.28px; height: 44px;margin-right: 8px; float: left;
+}
+.google img{
+    width: 134.28px; height: 40px;
+}
+.microsoft{
+    width: 110.77px; height: 44px; float: left;
+}
+.microsoft img{
+    width: 110.77px; height: 40px;
+}
+
+
+

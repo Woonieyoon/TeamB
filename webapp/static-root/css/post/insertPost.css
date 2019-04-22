@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/*** insert-post-section ***/
+.insert-post-section{
+    position: relative;
+    width: 935px; height: 600px; float: left; 
+    border: 1px solid #ddd;
+    background-color: #fff;
+    margin-top: 60px;
+}
+
+/** insert-post-header **/
+.insert-post-header{
+    width: 335px; height: 52px; padding: 16px; float: right;
+    border-bottom: 1px solid #ddd;
+    display: flex; flex-direction: row; align-items: center;
+}
+.insert-post-member-profile{
+    width: 34px; height: 34px; border-radius: 50%; overflow: hidden;
+    cursor: pointer; 
+}
+.insert-post-member-profile img{
+    width: 100%; height: 100%; 
+}
+.insert-post-member-id{
+    width: 252px; height: 18px; margin-left: 16px;
+    font-size: 14px; font-weight: 600; display: flex; align-items: center;
+    cursor: pointer;
+}
+
+/** insert-post-image **/
+.insert-post-image{
+    width: 598px; height: 598px; float: left; 
+}
+
+.insert-post-image-label{
+    width: 598px; height: 598px; float: left;
+}
+.insert-post-image-label img{
+    width: 100%; height: 100%;
+}
+
+/** insert-post-content **/
+.insert-post-content{
+    width: 335px; height: 516px; float: right;
+    display: flex; flex-direction: column; align-items: center;
+}
+.insert-post-content-text{
+    width: 335px; height: 278px; padding: 16px 20px;
+    border-bottom: 1px solid #ddd;
+}
+.insert-post-content-textarea{
+    width: 100%; height: 100%; border: none; resize: none;
+    font-size: 14px; line-height: 18px;
+}
+.insert-post-hashtag{
+    width: 335px; height: 238px; padding: 12px 20px;
+}
+.insert-post-hashtag-textarea{
+    width: 100%; height: 100%; border: none; resize: none;
+    font-size: 14px; line-height: 18px; color: #003569;
+}
+
+/** insert-post-btn **/
+.insert-post-btn{
+    width: 335px; height: 30px; float: right;
+    display: flex; flex-direction: row; align-items: center;
+    justify-content: center;
+}
+#insert-form-btn-register{
+    width: 150px; height: 20px;
+    font-size: 14px; font-weight: 600; color: #3897f0;
+    border: none; background: transparent;
+    cursor: pointer;
+}
+#insert-form-btn-register:active{
+    color: #003569;
+}
+#insert-form-btn-cancel{
+    width: 150px; height: 20px;
+    font-size: 14px; font-weight: 600; color: #3897f0;
+    border: none; background: transparent;
+    cursor: pointer;
+}
+#insert-form-btn-cancel:active{
+    color: #003569;
+}
+/* insert-form-btn-update */
+#insert-form-btn-update{
+    width: 150px; height: 20px;
+    font-size: 14px; font-weight: 600; color: #3897f0;
+    border: none; background: transparent;
+    cursor: pointer;
+}
+#insert-form-btn-update:active{
+    color: #003569;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

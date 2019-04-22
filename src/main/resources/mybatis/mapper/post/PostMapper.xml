@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.sys4u.spring.instagram.core.repository.post.PostRepository">
+	<resultMap id="PostMap"
+		type="kr.sys4u.spring.instagram.core.dto.post.Post">
+		<id column="NO" jdbcType="DECIMAL" property="no" />
+		<result column="MEMBER_NO" jdbcType="DECIMAL"
+			property="memberNo" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="CREATED_DATE" jdbcType="TIMESTAMP"
+			property="createdDate" />
+		<result column="UPDATED_DATE" jdbcType="TIMESTAMP"
+			property="updatedDate" />
+		<association column="NO" javaType="PostImage"
+			property="postImage"
+			select="kr.sys4u.spring.instagram.core.repository.post.PostImageRepository.getPostImage" />
+		<association column="MEMBER_NO" javaType="Member"
+			property="member"
+			select="kr.sys4u.spring.instagram.core.repository.member.MemberRepository.getMember" />
+		<association column="MEMBER_NO" javaType="MemberImage"
+			property="memberImage"
+			select="kr.sys4u.spring.instagram.core.repository.member.MemberImageRepository.getMemberImage" />
+		<collection column="NO" javaType="java.util.ArrayList"
+			property="postLikes" ofType="PostLike"
+			select="kr.sys4u.spring.instagram.core.repository.post.PostLikeRepository.getPostLikes" />
+		<collection column="NO" javaType="java.util.ArrayList"
+			property="hashtags" ofType="Hashtag"
+			select="kr.sys4u.spring.instagram.core.repository.post.HashtagRepository.getHashtags" />
+		<collection column="NO" javaType="java.util.ArrayList"
+			property="postReplies" ofType="PostReply"
+			select="kr.sys4u.spring.instagram.core.repository.post.PostReplyRepository.getReplies" />
+	</resultMap>
+
+	<select id="getPostList" resultMap="PostMap">
+	<![CDATA[
+	SELECT *
+	  FROM (SELECT ROWNUM AS RNUM, FINAL.*
+	          FROM (  SELECT RESULT.NO,
+	                         MAX (RESULT.MEMBER_NO)        AS MEMBER_NO,
+	                         MAX (RESULT.CONTENT)          AS CONTENT,
+	                         MAX (RESULT.CREATED_DATE)     AS CREATED_DATE,
+	                         MAX (RESULT.UPDATED_DATE)     AS UPDATED_DATE,
+	                         MAX (RESULT.DELETED)          AS DELETED
+	                    FROM (SELECT *
+	                            FROM (SELECT ROWNUM AS RNUM, TAB.*
+	                                    FROM (  SELECT P.NO,
+	                                                   P.MEMBER_NO,
+	                                                   P.CONTENT,
+	                                                   P.CREATED_DATE,
+	                                                   P.UPDATED_DATE,
+	                                                   P.DELETED
+	                                              FROM POST P
+	                                                   LEFT OUTER JOIN HASHTAG H
+	                                                       ON P.NO = H.POST_NO
+	                                                   INNER JOIN MEMBER M
+	                                                       ON P.MEMBER_NO = M.NO
+	                                             WHERE    H.NAME LIKE #{searchValue} || '%'
+	                                                   OR #{searchValue} IS NULL
+	                                                  AND P.DELETED = 'N'
+	                                          ORDER BY P.NO DESC) TAB)) RESULT
+	                GROUP BY RESULT.NO) FINAL
+	         WHERE ROWNUM < #{startRowIndex} + 5)
+	 WHERE RNUM >= #{startRowIndex}
+	 ]]>
+	</select>
+
+	<select id="getCurrentPostNo" resultType="int">
+		SELECT SEQ_POST.CURRVAL
+		FROM DUAL
+	</select>
+
+	<insert id="insert" parameterType="Post">
+		INSERT INTO POST(NO, MEMBER_NO, CONTENT, CREATED_DATE, UPDATED_DATE, DELETED)
+		VALUES (SEQ_POST.NEXTVAL, #{memberNo}, #{content}, SYSDATE, SYSDATE, 'N')
+		<selectKey resultType="int" order="AFTER">
+			SELECT NO FROM POST WHERE NO = SEQ_POST.CURRVAL
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="Post">
+		UPDATE POST
+		SET CONTENT = #{content}
+		, UPDATED_DATE = SYSDATE
+		WHERE NO = #{no}
+	</update>
+
+	<update id="updateDeleted" parameterType="int">
+		UPDATE POST
+		SET DELETED = 'Y'
+		WHERE NO = #{postNumber}
+	</update>
+
+	<select id="getPost" parameterType="int" resultMap="PostMap">
+		SELECT NO, MEMBER_NO, CONTENT, CREATED_DATE, UPDATED_DATE, DELETED
+		FROM POST
+		WHERE NO = #{postNo}
+		AND DELETED = 'N'
+	</select>
+
+</mapper>

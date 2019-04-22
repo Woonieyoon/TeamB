@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.sys4u.spring.instagram.core.repository.post.PostReplyRepository">
+  <resultMap id="PostReplyMap" type="kr.sys4u.spring.instagram.core.dto.post.PostReply">
+    <id column="NO" jdbcType="DECIMAL" property="no" />
+    <result column="POST_NO" jdbcType="DECIMAL" property="postNo" />
+    <result column="MEMBER_NO" jdbcType="DECIMAL" property="memberNo" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="DELETED" jdbcType="CHAR" property="deleted" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="UPDATED_DATE" jdbcType="TIMESTAMP" property="updatedDate" />
+    <result column="USERID" property="userId" />
+    <association column="MEMBER_NO" javaType="MemberImage" property="memberImage"
+    	select="kr.sys4u.spring.instagram.core.repository.member.MemberImageRepository.getMemberImage"/>
+  </resultMap>
+  
+  <select id="getReplies" parameterType="int" resultMap="PostReplyMap">
+  	SELECT PR.NO,
+	       PR.POST_NO,
+	       PR.MEMBER_NO,
+	       PR.CONTENT,
+	       PR.DELETED,
+	       PR.CREATED_DATE,
+	       PR.UPDATED_DATE,
+	       M.LOGINID     AS USERID
+	  FROM POST_REPLY PR INNER JOIN MEMBER M ON PR.MEMBER_NO = M.NO
+	 WHERE POST_NO = #{postNo}
+	   AND PR.DELETED = 'N'
+  ORDER BY NO DESC
+  </select>
+  
+  <insert id="insert" parameterType="PostReply">
+  	INSERT INTO POST_REPLY(NO, POST_NO, MEMBER_NO, CONTENT, DELETED, CREATED_DATE, UPDATED_DATE)
+  	VALUES(SEQ_REPLY_POST.NEXTVAL, #{postNo}, #{memberNo}, #{content}, 'N', SYSDATE, SYSDATE)
+  </insert>
+  
+  <delete id="delete" parameterType="PostReply">
+  	DELETE FROM POST_REPLY
+  	 WHERE NO = #{replyNo}
+  </delete>
+  
+  <select id="getPostReplyCount" resultType="int" parameterType="int">
+  	SELECT COUNT(*) FROM POST_REPLY WHERE POST_NO = #{postNo}
+  </select>
+</mapper>

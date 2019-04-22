@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.sys4u.spring.instagram.core.repository.post.PostLikeRepository">
+  <resultMap id="PostLikeMap" type="kr.sys4u.spring.instagram.core.dto.post.PostLike">
+    <id column="NO" jdbcType="DECIMAL" property="no" />
+    <result column="MEMBER_NO" jdbcType="DECIMAL" property="memberNo" />
+    <result column="LIKEUSER" property="likeUser" />
+    <result column="POST_NO" jdbcType="DECIMAL" property="postNo" />
+  </resultMap>
+  
+  <select id="postLikeExist" parameterType="PostLike" resultType="String">
+  	SELECT 1 
+  	  FROM DUAL
+  	 WHERE EXISTS (SELECT 1
+  	 				 FROM POST_LIKE
+  	 				WHERE MEMBER_NO = #{memberNo}
+  	 				  AND POST_NO = #{postNo})
+  </select>
+  
+  <select id="getPostLikes" parameterType="int" resultType="PostLike">
+  	SELECT NO,
+	       MEMBER_NO,
+	       POST_NO,
+	       (SELECT LOGINID     AS LIKEUSER
+	          FROM MEMBER
+	         WHERE NO = (SELECT MEMBER_NO
+	                       FROM POST_LIKE
+	                      WHERE NO = (  SELECT MAX (NO)     AS MAXNO
+	                                      FROM POST_LIKE
+	                                  GROUP BY POST_NO
+	                                    HAVING POST_NO = #{postNo})))    AS LIKEUSER
+	  FROM POST_LIKE
+	 WHERE POST_NO = #{postNo}
+  </select>
+  
+  <insert id="setLike" parameterType="PostLike">
+  	INSERT INTO POST_LIKE(NO, MEMBER_NO, POST_NO)
+  	VALUES(SEQ_LIKE_POST.NEXTVAL, #{memberNo}, #{postNo})
+  </insert>
+  
+  
+  <delete id="delLike" parameterType="PostLike">
+  	DELETE FROM POST_LIKE
+  	 WHERE MEMBER_NO = #{memberNo}
+  	   AND POST_NO = #{postNo}
+  </delete>
+  
+  <select id="getPostLikeCount" resultType="int" parameterType="int">
+  	SELECT COUNT(*) FROM POST_LIKE WHERE POST_NO = #{postNo}
+  </select>
+  
+  
+</mapper>

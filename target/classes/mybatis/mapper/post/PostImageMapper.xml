@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.sys4u.spring.instagram.core.repository.post.PostImageRepository">
+  <resultMap id="PostImageMap" type="kr.sys4u.spring.instagram.core.dto.post.PostImage">
+    <id column="POST_NO" jdbcType="DECIMAL" property="postNo" />
+    <result column="PATH" jdbcType="VARCHAR" property="path" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="EXTENSION" jdbcType="VARCHAR" property="extension" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="UPDATED_DATE" jdbcType="TIMESTAMP" property="updatedDate" />
+  </resultMap>
+  
+  <select id="getPostImage" parameterType="int" resultType="PostImage">
+  	SELECT POST_NO, PATH, NAME, EXTENSION, CREATED_DATE, UPDATED_DATE
+  	  FROM POST_IMAGE
+  	 WHERE POST_NO = #{POST_NO}
+  </select>
+  
+  <insert id="insert" parameterType="PostImage">
+	INSERT INTO POST_IMAGE(POST_NO, PATH, NAME, EXTENSION, CREATED_DATE, UPDATED_DATE)
+	VALUES(${postNo}, #{path}, #{name}, #{extension}, SYSDATE, SYSDATE)
+  </insert>
+  
+    <select id="getMyPageImage" parameterType="int" resultType="java.util.LinkedHashMap">
+  	SELECT NO,PATH,NAME,EXTENSION,P.CREATED_DATE,P.UPDATED_DATE 
+  	  FROM POST P, POST_IMAGE PI WHERE MEMBER_NO = #{memberNo} AND P.NO = PI.POST_NO 
+  	 ORDER BY PI.CREATED_DATE DESC 
+	</select>
+	
+	<delete id="deleteByPostNo" parameterType="int">
+		DELETE FROM POST_IMAGE 
+		WHERE POST_NO = #{postNumber}
+	</delete>
+</mapper>

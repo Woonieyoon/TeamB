@@ -1,0 +1,51 @@
+@charset "UTF-8";
+body{
+	background-color: #fafafa;
+}
+
+.wrap{
+	width: 100%; display: flex;
+    flex-direction: column; align-items: center;
+}
+.top{
+    position: fixed; z-index: 999;
+	width: 100%; height: 76px; border-bottom: 1px solid #dbdbdb; float: left; background-color: #ffffff;
+    overflow-y: hidden;
+}
+
+/* content-wrap */
+.content-wrap{
+	width: 1010px; margin: 0 auto;
+}
+.content-wrap::before{
+    content: ""; width: 100%; height: 96px; float: left; background-color: #fafafa;
+}
+.content-wrap::after{
+    content: ""; width: 100%; height: 100px; float: left; background-color: #fafafa;
+}
+
+/* content-btn */
+.main-btn-insert-div{
+    position: fixed; bottom: 100px; right: 300px;
+    width: 64px; height: 64px; border-radius: 50%; overflow: hidden;
+    box-shadow: 2px 2px 5px 1px gray;
+}
+.main-btn-insert-div:active{
+    box-shadow: none;
+}
+#main-btn-insert{
+    width: 100%; height: 100%; border: none;
+    background-image: url(/team-b-webapp/static-root/images/insert_button.png);
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
+}
+#main-btn-insert:active{
+    background-image: url(/team-b-webapp/static-root/images/insert_button_click.png);
+    background-repeat: no-repeat;
+}
+
+/* content-div */
+.content-div{
+	width: 1010px; margin: 0 auto; 
+}
